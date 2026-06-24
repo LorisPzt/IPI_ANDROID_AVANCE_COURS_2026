@@ -19,7 +19,7 @@ data class PhotographerDTO(
     val portfolio: List<String>,
 )
 
-suspend fun main() {
+suspend fun testPhotographer() {
 
     initKoin()
 
