@@ -47,7 +47,7 @@ jobs:
       # --continue : exécute les deux tâches de test même si la première échoue,
       # pour générer les rapports des deux.
       - name: Run shared tests
-        run: ./gradlew --continue :composeApp:jvmTest :composeApp:testAndroidHostTest
+        run: ./gradlew --continue jvmTest testDebugUnitTest
 
       # Sauvegarde les rapports HTML de test comme artefact téléchargeable.
       # if: always() est INDISPENSABLE : sans lui, l'étape serait sautée quand
@@ -192,15 +192,15 @@ jobs:
           path: A03_kmp_mprolead_g1-simulator.zip
           if-no-files-found: ignore
 
-      # Tests de la logique partagée compilée pour le simulateur iOS (arm64).
+      # Tests de la logique partagée pour le simulateur iOS
       - name: Run iOS simulator tests
-        run: ./gradlew :composeApp:iosSimulatorArm64Test
+        run: ./gradlew iosSimulatorArm64Test
 
-      # Rapport HTML des tests iOS (if: always() -> aussi en cas d'échec
+      # Ajustez le chemin du rapport d'échec si nécessaire :
       - name: Upload iOS test reports
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
           name: test-reports-ios
-          path: shared/build/reports/tests/
+          path: build/reports/tests/
           if-no-files-found: ignore
