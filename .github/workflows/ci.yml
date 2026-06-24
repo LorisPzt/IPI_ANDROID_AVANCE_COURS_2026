@@ -47,7 +47,7 @@ jobs:
       # --continue : exécute les deux tâches de test même si la première échoue,
       # pour générer les rapports des deux.
       - name: Run shared tests
-        run: ./gradlew --continue :shared:jvmTest :shared:testAndroidHostTest
+        run: ./gradlew --continue :composeApp:jvmTest :composeApp:testAndroidHostTest
 
       # Sauvegarde les rapports HTML de test comme artefact téléchargeable.
       # if: always() est INDISPENSABLE : sans lui, l'étape serait sautée quand
@@ -194,7 +194,7 @@ jobs:
 
       # Tests de la logique partagée compilée pour le simulateur iOS (arm64).
       - name: Run iOS simulator tests
-        run: ./gradlew :shared:iosSimulatorArm64Test
+        run: ./gradlew :composeApp:iosSimulatorArm64Test
 
       # Rapport HTML des tests iOS (if: always() -> aussi en cas d'échec
       - name: Upload iOS test reports
